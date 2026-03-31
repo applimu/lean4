@@ -44,8 +44,13 @@ def gcd (m n : @& Nat) : Nat :=
   The greatest common divisor of `0` and any natural number is itself.
   This theorem takes an explicit argument, see `Nat.zero_gcd` for the implicit version.
 -/
-@[simp] theorem gcd_zero_left (y : Nat) : gcd 0 y = y := by
+theorem gcd_zero_left (y : Nat) : gcd 0 y = y := by
   rw [gcd]; rfl
+/--
+  The greatest common divisor of `0` and any natural number is itself.
+  This theorem takes an implicit argument, see `Nat.gcd_zero_left` for the explicit version.
+-/
+@[simp] theorem zero_gcd {n : Nat} : gcd 0 n = n := gcd_zero_left n
 
 theorem gcd_succ (x y : Nat) : gcd (succ x) y = gcd (y % succ x) (succ x) := by
   rw [gcd]; rfl
@@ -60,7 +65,7 @@ theorem gcd_def (x y : Nat) : gcd x y = if x = 0 then y else gcd (y % x) x := by
   The greatest common divisor of `1` and any natural number is `1`.
   This theorem takes an explicit argument, see `Nat.one_gcd` for the implicit version.
 -/
-@[simp] theorem gcd_one_left (n : Nat) : gcd 1 n = 1 := by
+theorem gcd_one_left (n : Nat) : gcd 1 n = 1 := by
   rw [gcd_succ, mod_one]
   rfl
 
@@ -68,7 +73,7 @@ theorem gcd_def (x y : Nat) : gcd x y = if x = 0 then y else gcd (y % x) x := by
   The greatest common divisor of any natural number and `0` is itself.
   This theorem takes an explicit argument, see `Nat.gcd_zero` for the implicit version.
 -/
-@[simp] theorem gcd_zero_right (n : Nat) : gcd n 0 = n := by
+theorem gcd_zero_right (n : Nat) : gcd n 0 = n := by
   cases n with
   | zero => simp
   | succ n =>
@@ -82,7 +87,7 @@ instance : Std.LawfulIdentity gcd 0 where
 /--
   The greatest common divisor of any natural number with itself is itself.
 -/
-@[simp] theorem gcd_self (n : Nat) : gcd n n = n := by
+theorem gcd_self (n : Nat) : gcd n n = n := by
   cases n <;> simp [gcd_succ]
 instance : Std.IdempotentOp gcd := ⟨gcd_self⟩
 
@@ -153,28 +158,23 @@ theorem gcd_left_comm (m n k : Nat) : gcd m (gcd n k) = gcd n (gcd m k) := by
   The greatest common divisor of any natural number and `1` is `1`.
   This theorem takes an explicit argument, see `Nat.gcd_one` for the implicit version.
 -/
-@[simp] theorem gcd_one_right (n : Nat) : gcd n 1 = 1 := (gcd_comm n 1).trans (gcd_one_left n)
+theorem gcd_one_right (n : Nat) : gcd n 1 = 1 := (gcd_comm n 1).trans (gcd_one_left n)
 
-/--
-  The greatest common divisor of `0` and any natural number is itself.
-  This theorem takes an implicit argument, see `Nat.gcd_zero_left` for the explicit version.
--/
-theorem zero_gcd {n : Nat} : gcd 0 n = n := gcd_zero_left n
 /--
   The greatest common divisor of any natural number and `0` is itself.
   This theorem takes an implicit argument, see `Nat.gcd_zero_right` for the explicit version.
 -/
-theorem gcd_zero {n : Nat} : gcd n 0 = n := gcd_zero_right n
+@[simp] theorem gcd_zero {n : Nat} : gcd n 0 = n := gcd_zero_right n
 /--
   The greatest common divisor of `1` and any natural number is `1`.
   This theorem takes an implicit argument, see `Nat.gcd_one_left` for the explicit version.
 -/
-theorem one_gcd {n : Nat} : gcd 1 n = 1 := gcd_one_left n
+@[simp] theorem one_gcd {n : Nat} : gcd 1 n = 1 := gcd_one_left n
 /--
   The greatest common divisor of any natural number and `1` is `1`.
   This theorem takes an implicit argument, see `Nat.gcd_one_right` for the explicit version.
 -/
-theorem gcd_one {n : Nat} : gcd n 1 = 1 := gcd_one_right n
+@[simp] theorem gcd_one {n : Nat} : gcd n 1 = 1 := gcd_one_right n
 
 theorem gcd_mul_left (m n k : Nat) : gcd (m * n) (m * k) = m * gcd n k := by
   induction n, k using gcd.induction with
