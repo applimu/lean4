@@ -53,17 +53,52 @@ theorem gcd_dvd_left (a b : Int) : (gcd a b : Int) ∣ a := by
 theorem gcd_dvd_right (a b : Int) : (gcd a b : Int) ∣ b := by
   simp [ofNat_dvd_left, gcd_dvd_natAbs_right]
 
+/--
+  The greatest common divisor of `1` and any integer is `1`.
+  This theorem takes an implicit argument. See `Int.gcd_one_left` for the explicit version.
+-/
 @[simp] theorem one_gcd {a : Int} : gcd 1 a = 1 := by simp [gcd_eq_natAbs_gcd_natAbs]
+/--
+  The greatest common divisor of `1` and any integer is `1`.
+  This theorem takes an implicit argument. See `Int.gcd_one_right` for the explicit version.
+-/
 @[simp] theorem gcd_one {a : Int} : gcd a 1 = 1 := by simp [gcd_eq_natAbs_gcd_natAbs]
 
+/--
+  The greatest common divisor of `0` and any integer is it's absolute value.
+  This theorem takes an implicit argument. See `Int.gcd_zero_left` for the explicit version.
+-/
 @[simp] theorem zero_gcd {a : Int} : gcd 0 a = a.natAbs := by simp [gcd_eq_natAbs_gcd_natAbs]
+/--
+  The greatest common divisor of `0` and any integer is it's absolute value.
+  This theorem takes an implicit argument. See `Int.gcd_zero_right` for the explicit version.
+-/
 @[simp] theorem gcd_zero {a : Int} : gcd a 0 = a.natAbs := by simp [gcd_eq_natAbs_gcd_natAbs]
 
+/--
+  The greatest common divisor of `1` and any integer is `1`.
+  This theorem takes an explicit argument. See `Int.one_gcd` for the implicit version.
+-/
 theorem gcd_one_left (a : Int) : gcd 1 a = 1 := by simp
+/--
+  The greatest common divisor of `1` and any integer is `1`.
+  This theorem takes an explicit argument. See `Int.gcd_one` for the implicit version.
+-/
 theorem gcd_one_right (a : Int) : gcd a 1 = 1 := by simp
+/--
+  The greatest common divisor of `0` and any integer is it's absolute value.
+  This theorem takes an explicit argument. See `Int.zero_gcd` for the implicit version.
+-/
 theorem gcd_zero_left (a : Int) : gcd 0 a = a.natAbs := by simp
+/--
+  The greatest common divisor of `0` and any integer is it's absolute value.
+  This theorem takes an explicit argument. See `Int.gcd_zero` for the implicit version.
+-/
 theorem gcd_zero_right (a : Int) : gcd a 0 = a.natAbs := by simp
 
+/--
+  The greatest common divisor of any integer with itself is it's absolute value.
+-/
 @[simp] theorem gcd_self {a : Int} : gcd a a = a.natAbs := by simp [gcd_eq_natAbs_gcd_natAbs]
 
 @[simp] theorem neg_gcd {a b : Int} : gcd (-a) b = gcd a b := by simp [gcd_eq_natAbs_gcd_natAbs]
@@ -475,18 +510,53 @@ theorem gcd_le_natAbs_mul {a b : Int} (ha : a ≠ 0) (hb : b ≠ 0) : gcd a b �
 
 theorem lcm_comm (a b : Int) : lcm a b = lcm b a := Nat.lcm_comm ..
 
+/--
+  The least common multiple of `1` and any integer is it's absolute value.
+  This theorem takes an implicit argument. See `Int.lcm_one_left` for the explicit version.
+-/
 @[simp] theorem one_lcm {a : Int} : lcm 1 a = a.natAbs := by simp [lcm_eq_natAbs_lcm_natAbs]
+/--
+  The least common multiple of any integer and `1` is it's absolute value.
+  This theorem takes an implicit argument. See `Int.lcm_one_right` for the explicit version.
+-/
 @[simp] theorem lcm_one {a : Int} : lcm a 1 = a.natAbs := by simp [lcm_eq_natAbs_lcm_natAbs]
 
+/--
+  The least common multiple of `0` and any integer is `0`.
+  This theorem takes an implicit argument. See `Int.lcm_zero_left` for the explicit version.
+-/
 @[simp] theorem zero_lcm {a : Int} : lcm 0 a = 0 := by simp [lcm_eq_natAbs_lcm_natAbs]
+/--
+  The least common multiple of any integer and `0` is `0`.
+  This theorem takes an implicit argument. See `Int.lcm_zero_right` for the explicit version.
+-/
 @[simp] theorem lcm_zero {a : Int} : lcm a 0 = 0 := by simp [lcm_eq_natAbs_lcm_natAbs]
 
+/--
+  The least common multiple of `1` and any integer is it's absolute value.
+  This theorem takes an explicit argument. See `Int.one_lcm` for the implicit version.
+-/
 theorem lcm_one_left (a : Int) : lcm 1 a = a.natAbs := by simp
+/--
+  The least common multiple of any integer and `1` is it's absolute value.
+  This theorem takes an explicit argument. See `Int.lcm_one` for the implicit version.
+-/
 theorem lcm_one_right (a : Int) : lcm a 1 = a.natAbs := by simp
 
+/--
+  The least common multiple of `0` and any integer is `0`.
+  This theorem takes an explicit argument. See `Int.zero_lcm` for the implicit version.
+-/
 theorem lcm_zero_left (a : Int) : lcm 0 a = 0 := by simp
+/--
+  The least common multiple of any integer and `0` is `0`.
+  This theorem takes an explicit argument. See `Int.lcm_zero` for the implicit version.
+-/
 theorem lcm_zero_right (a : Int) : lcm a 0 = 0 := by simp
 
+/--
+  The least common multiple of any integer with itself is it's absolute value.
+-/
 @[simp] theorem lcm_self {a : Int} : lcm a a = a.natAbs := Nat.lcm_self _
 
 @[simp] theorem neg_lcm {a b : Int} : lcm (-a) b = lcm a b := by simp [lcm_eq_natAbs_lcm_natAbs]

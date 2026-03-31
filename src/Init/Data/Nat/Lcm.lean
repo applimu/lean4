@@ -56,17 +56,32 @@ theorem lcm_comm (m n : Nat) : lcm m n = lcm n m := by
   rw [lcm_eq_mul_div, lcm_eq_mul_div, Nat.mul_comm n m, gcd_comm n m]
 instance : Std.Commutative lcm := ⟨lcm_comm⟩
 
+/--
+  The least common multiple of `0` and any natural number is `0`.
+-/
 @[simp] theorem lcm_zero_left (m : Nat) : lcm 0 m = 0 := by simp [lcm_eq_mul_div]
 
+/--
+  The least common multiple of any natural number and `0` is `0`.
+-/
 @[simp] theorem lcm_zero_right (m : Nat) : lcm m 0 = 0 := by simp [lcm_eq_mul_div]
 
+/--
+  The least common multiple of `1` and any natural number is itself.
+-/
 @[simp] theorem lcm_one_left (m : Nat) : lcm 1 m = m := by simp [lcm_eq_mul_div]
 
+/--
+  The least common multiple of any natural number and `1` is itself.
+-/
 @[simp] theorem lcm_one_right (m : Nat) : lcm m 1 = m := by simp [lcm_eq_mul_div]
 instance : Std.LawfulIdentity lcm 1 where
   left_id := lcm_one_left
   right_id := lcm_one_right
 
+/--
+  The least common multiple of any natural number with itself is itself.
+-/
 @[simp] theorem lcm_self (m : Nat) : lcm m m = m := by
   match eq_zero_or_pos m with
   | .inl h => rw [h, lcm_zero_left]

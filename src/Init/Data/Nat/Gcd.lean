@@ -40,6 +40,9 @@ def gcd (m n : @& Nat) : Nat :=
   termination_by m
   decreasing_by simp_wf; apply mod_lt _ (zero_lt_of_ne_zero _); assumption
 
+/--
+  The greatest common divisor of `0` and any natural number is itself.
+-/
 @[simp] theorem gcd_zero_left (y : Nat) : gcd 0 y = y := by
   rw [gcd]; rfl
 
@@ -52,10 +55,16 @@ theorem gcd_add_one (x y : Nat) : gcd (x + 1) y = gcd (y % (x + 1)) (x + 1) := b
 theorem gcd_def (x y : Nat) : gcd x y = if x = 0 then y else gcd (y % x) x := by
   cases x <;> simp [Nat.gcd_add_one]
 
+/--
+  The greatest common divisor of `1` and any natural number is `1`.
+-/
 @[simp] theorem gcd_one_left (n : Nat) : gcd 1 n = 1 := by
   rw [gcd_succ, mod_one]
   rfl
 
+/--
+  The greatest common divisor of any natural number and `0` is itself.
+-/
 @[simp] theorem gcd_zero_right (n : Nat) : gcd n 0 = n := by
   cases n with
   | zero => simp
@@ -67,6 +76,9 @@ instance : Std.LawfulIdentity gcd 0 where
   left_id := gcd_zero_left
   right_id := gcd_zero_right
 
+/--
+  The greatest common divisor of any natural number with itself is itself.
+-/
 @[simp] theorem gcd_self (n : Nat) : gcd n n = n := by
   cases n <;> simp [gcd_succ]
 instance : Std.IdempotentOp gcd := ⟨gcd_self⟩
@@ -134,6 +146,9 @@ instance : Std.Associative gcd := ⟨gcd_assoc⟩
 theorem gcd_left_comm (m n k : Nat) : gcd m (gcd n k) = gcd n (gcd m k) := by
   rw [← gcd_assoc, ← gcd_assoc, gcd_comm m n]
 
+/--
+  The greatest common divisor of any natural number and `1` is `1`.
+-/
 @[simp] theorem gcd_one_right (n : Nat) : gcd n 1 = 1 := (gcd_comm n 1).trans (gcd_one_left n)
 
 theorem gcd_mul_left (m n k : Nat) : gcd (m * n) (m * k) = m * gcd n k := by
