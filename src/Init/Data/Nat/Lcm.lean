@@ -58,26 +58,55 @@ instance : Std.Commutative lcm := ⟨lcm_comm⟩
 
 /--
   The least common multiple of `0` and any natural number is `0`.
+  This function takes an explicit argument, See `Nat.zero_lcm` for the implicit version.
 -/
 @[simp] theorem lcm_zero_left (m : Nat) : lcm 0 m = 0 := by simp [lcm_eq_mul_div]
 
 /--
   The least common multiple of any natural number and `0` is `0`.
+  This function takes an explicit argument, See `Nat.lcm_zero` for the implicit version.
 -/
 @[simp] theorem lcm_zero_right (m : Nat) : lcm m 0 = 0 := by simp [lcm_eq_mul_div]
 
 /--
   The least common multiple of `1` and any natural number is itself.
+  This function takes an explicit argument, See `Nat.one_lcm` for the implicit version.
 -/
 @[simp] theorem lcm_one_left (m : Nat) : lcm 1 m = m := by simp [lcm_eq_mul_div]
 
 /--
   The least common multiple of any natural number and `1` is itself.
+  This function takes an explicit argument, See `Nat.lcm_one` for the implicit version.
 -/
 @[simp] theorem lcm_one_right (m : Nat) : lcm m 1 = m := by simp [lcm_eq_mul_div]
 instance : Std.LawfulIdentity lcm 1 where
   left_id := lcm_one_left
   right_id := lcm_one_right
+
+/--
+  The least common multiple of `0` and any natural number is `0`.
+  This function takes an implicit argument, See `Nat.lcm_zero_left` for the explicit version.
+-/
+theorem zero_lcm {m : Nat} : lcm 0 m = 0 := lcm_zero_left m
+
+/--
+  The least common multiple of any natural number and `0` is `0`.
+  This function takes an implicit argument, See `Nat.lcm_zero_right` for the explicit version.
+-/
+theorem lcm_zero {m : Nat} : lcm m 0 = 0 := lcm_zero_right m
+
+/--
+  The least common multiple of `1` and any natural number is itself.
+  This function takes an implicit argument, See `Nat.lcm_one_left` for the explicit version.
+-/
+theorem one_lcm {m : Nat} : lcm 1 m = m := lcm_one_left m
+
+/--
+  The least common multiple of any natural number and `1` is itself.
+  This function takes an implicit argument, See `Nat.lcm_one_right` for the explicit version.
+-/
+theorem lcm_one {m : Nat} : lcm m 1 = m := lcm_one_right m
+
 
 /--
   The least common multiple of any natural number with itself is itself.
