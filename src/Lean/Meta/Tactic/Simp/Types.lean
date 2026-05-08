@@ -70,7 +70,7 @@ structure Context where
   metaConfig        : ConfigWithKey := default
   indexConfig       : ConfigWithKey := default
   /-- `maxDischargeDepth` from `config` as an `UInt32`. -/
-  maxDischargeDepth : UInt32 := UInt32.ofNatTruncate config.maxDischargeDepth
+  maxDischargeDepth : UInt32 := UInt32.ofNatClamp config.maxDischargeDepth
   simpTheorems      : SimpTheoremsArray := {}
   congrTheorems     : SimpCongrTheorems := {}
   /--
@@ -722,6 +722,7 @@ def simpAppUsingCongr (e : Expr) : SimpM Result := do
     if i == 0 then
       simp f
     else
+      checkSystem "simp"
       let i := i - 1
       let .app f a := e | unreachable!
       let fr ← visit f i
